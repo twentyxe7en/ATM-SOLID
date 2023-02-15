@@ -1,15 +1,19 @@
 package atm;
+
+import java.util.ArrayList;
+
 public class Authentication {
 
     public Authentication() {
     }
     
-    public boolean login(int log_id, int log_key, int acc_id, int acc_key) {
-        if (acc_id == log_id && acc_key == log_key) {
-            return true;
-        } else {
-            System.out.println("Account didn't match or does not exist.");
+    public boolean login(int entry_id, int entry_key, ArrayList<Integer> db_id, ArrayList<Integer> db_key) {
+        for (int i = 0; i < db_id.size(); i++) {
+            if (db_id.get(i) == entry_id && db_key.get(i) == entry_key) {
+                return true;
+            }
         }
+        System.out.println("Entry did not match or account does not exist.");
         return false;
     }
 }
