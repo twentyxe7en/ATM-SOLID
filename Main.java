@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Process p = new Process();
-        Account acc_1 = new Account(1, 6364);
+        Account acc = new Account();
         Authentication auth = new Authentication();
         
         int looper = 1;
@@ -15,7 +15,7 @@ public class Main {
             int id = in.nextInt();
             System.out.print("Key: ");
             int key = in.nextInt();
-            while (auth.login(id, key, acc_1.getId(), acc_1.getKey())) {
+            while (auth.login(id, key, acc.getId(), acc.getKey())) {
                 System.out.println("======================");
                 System.out.println("[1] View Savings");
                 System.out.println("[2] Deposit to Savings");
@@ -26,19 +26,19 @@ public class Main {
                 switch (action) {
                     case 1:
                         System.out.println("View Savings");
-                        System.out.println("Your Savings: " + acc_1.getSavings());
+                        System.out.println("Your Savings: " + acc.getSavings());
                         break;
                     case 2:
                         System.out.println("Deposit to Savings");
                         System.out.print("Enter deposit amount: ");
-                        acc_1.setSavings(p.deposit(in.nextDouble(), acc_1.getSavings()));
-                        System.out.println("Your Savings: " + acc_1.getSavings());
+                        p.deposit(in.nextDouble(), id, key, acc.getId(), acc.getKey(), acc.getSavings());
+                        System.out.println("Your Savings: " + acc.getSavings());
                         break;
                     case 3:
-                        System.out.println("Withdraw to Savings");
+                        System.out.println("Withdraw from Savings");
                         System.out.print("Enter withdraw amount: ");
-                        acc_1.setSavings(p.withdraw(in.nextDouble(), acc_1.getSavings()));
-                        System.out.println("Your Savings: " + acc_1.getSavings());
+                        p.withdraw(in.nextDouble(), id, key, acc.getId(), acc.getKey(), acc.getSavings());
+                        System.out.println("Your Savings: " + acc.getSavings());
                         break;
                     case 0:
                         System.out.println("Exiting program.");
